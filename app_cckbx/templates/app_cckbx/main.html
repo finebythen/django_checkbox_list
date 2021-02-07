@@ -1,0 +1,85 @@
+{% extends 'app_cckbx/base.html' %}
+
+{% block link %}{% endblock link %}
+
+{% block title %}Main Site{% endblock title %}
+
+{% block style %}
+
+<!--    table {-->
+<!--        font-size: 0.8rem;-->
+<!--        display: block;-->
+<!--    }-->
+<!--    thead th {-->
+<!--        position: sticky;-->
+<!--        top: 0;-->
+<!--    }-->
+<!--    table tbody {-->
+<!--        height: 500px;-->
+<!--        overflow-y: auto;-->
+<!--        overflow-x: hidden;-->
+<!--    }-->
+
+    .table-wrapper {
+        overflow: hidden;
+        overflow-y: auto;
+        height: 500px;
+    }
+    table { font-size: 0.8rem; }
+    th {
+        top: 0;
+        z-index: 2;
+        position: sticky;
+        background-color: white;
+    }
+    button { margin-top: 1rem; }
+
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-body">
+
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <div class="table-wrapper">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">id</th>
+                                <th scope="col">country</th>
+                                <th scope="col">continent</th>
+                                <th scope="col">year</th>
+                                <th scope="col">lifeExp</th>
+                                <th scope="col">pop</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in json_df %}
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="list_gap" value="{{ item.id_count }}">
+                                    </td>
+                                    <td>{{ item.id_count }}</td>
+                                    <td>{{ item.country }}</td>
+                                    <td>{{ item.continent }}</td>
+                                    <td>{{ item.year }}</td>
+                                    <td>{{ item.lifeExp }}</td>
+                                    <td>{{ item.pop }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn btn-success" type="submit">Auswählen</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}{% endblock script %}
